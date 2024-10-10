@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cug84g4qoaxli"]
+
+[ext_resource type="PackedScene" uid="uid://c4kqgomifh0ir" path="res://enemy.tscn" id="1_xs1ut"]
+[ext_resource type="PackedScene" uid="uid://bbpru3vrea1fv" path="res://tsukasa.tscn" id="2_nn40t"]
+[ext_resource type="PackedScene" uid="uid://c5n241jb8bdeo" path="res://bullet_kusabi.tscn" id="3_25e3r"]
+
+[node name="Maingamescene" type="Node2D"]
+
+[node name="CharacterNode2D" parent="." instance=ExtResource("1_xs1ut")]
+position = Vector2(228, 325)
+
+[node name="Node2D" parent="." instance=ExtResource("2_nn40t")]
+position = Vector2(524, 320)
+
+[node name="BulletKusabi" parent="." instance=ExtResource("3_25e3r")]
+position = Vector2(428, 466)

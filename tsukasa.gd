@@ -1,0 +1,77 @@
+extends CharacterBody2D
+
+# 通常の移動速度
+@export var speed = 350
+# 低速移動時の速度
+@export var slow_speed = 150
+
+# キャラクターの移動ベクトル
+var movement_velocity = Vector2.ZERO
+
+# 揺れの幅（振幅）と速さ（周波数）
+@export var float_amplitude = 5.0
+@export var float_speed = 2.0
+
+# 初期のY位置を記録する変数
+var initial_sprite_y_position = 0.0
+# 経過時間
+var time_passed = 0.0
+
+# 赤い円の表示状態を管理するフラグ
+var red_circle_visible = false
+
+func _ready():
+	# スプライトの初期Y位置を記録
+	initial_sprite_y_position = $Sprite2D.position.y
+	
+	# 赤い円 (当たり判定可視化) の初期設定: 非表示
+	$RedCircle.visible = false
+
+func _process(delta):
+	# 入力を受け取ってプレイヤーの動きを更新
+	handle_input()
+	# 速度を適用して移動
+	velocity = movement_velocity
+	move_and_slide()
+
+	# スプライトのみ揺らす（当たり判定は動かさない）
+	float_sprite(delta)
+
+	# 当たり判定の表示を更新
+	update_collision_visibility()
+
+# キーボード入力を処理
+func handle_input():
+	movement_velocity = Vector2.ZERO  # 毎フレームリセットして新しい入力を反映
+
+	if Input.is_action_pressed("ui_right"):
+		movement_velocity.x += 1
+	if Input.is_action_pressed("ui_left"):
+		movement_velocity.x -= 1
+	if Input.is_action_pressed("ui_down"):
+		movement_velocity.y += 1
+	if Input.is_action_pressed("ui_up"):
+		movement_velocity.y -= 1
+
+	# 速度を決定（Shiftキーが押されている場合は低速移動）
+	var current_speed = speed
+	if Input.is_action_pressed("ui_shift"):
+		current_speed = slow_speed
+
+	# 入力ベクトルを正規化して速度を掛け算
+	movement_velocity = movement_velocity.normalized() * current_speed
+
+# スプライトを上下に揺らす動作
+func float_sprite(delta):
+	# 経過時間を加算
+	time_passed += delta
+	# スプライトのY位置を揺らす（サイン波で上下動）
+	$Sprite2D.position.y = initial_sprite_y_position + sin(time_passed * float_speed) * float_amplitude
+
+# Shiftキーが押されている間は当たり判定を表示
+func update_collision_visibility():
+	# Shiftキーが押されている間、当たり判定の赤い円を表示
+	if Input.is_action_pressed("ui_shift"):
+		$RedCircle.visible = true
+	else:
+		$RedCircle.visible = false
