@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://47apbculcscx"]
+
+[ext_resource type="Texture2D" uid="uid://dsw10e15javn" path="res://bullet/cylinder.png" id="1_f326c"]
+[ext_resource type="Script" path="res://bullet/cylinder.gd" id="1_yhago"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gttmi"]
+size = Vector2(22, 10)
+
+[node name="Cylinder" type="Area2D"]
+script = ExtResource("1_yhago")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("1_f326c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gttmi")

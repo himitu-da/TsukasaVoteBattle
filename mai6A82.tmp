@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://game_manager.gd" id="4_b3scd"]
 [ext_resource type="FontFile" uid="uid://cip2th0qpjt52" path="res://ReggaeOne-Regular.ttf" id="5_dlt0g"]
 
-[node name="MainGameScene" type="Node2D"]
+[node name="Maingamescene" type="Node2D"]
 
 [node name="koishi" parent="." instance=ExtResource("1_xs1ut")]
 position = Vector2(1024, 384)
@@ -20,19 +20,10 @@ position = Vector2(192, 384)
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("4_b3scd")
 
-[node name="ColorRect" type="ColorRect" parent="GameManager"]
-z_index = 10
-offset_left = 336.0
-offset_top = 12.0
-offset_right = 504.0
-offset_bottom = 53.0
-scale = Vector2(1, 0.983716)
-color = Color(0, 0, 0.0392157, 1)
-
 [node name="TimerLabel" type="Label" parent="GameManager"]
 z_index = 15
-offset_left = 396.0
-offset_right = 488.0
+offset_left = 616.0
+offset_right = 708.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 24
@@ -42,8 +33,8 @@ vertical_alignment = 1
 
 [node name="Time" type="Label" parent="GameManager"]
 z_index = 15
-offset_left = 332.0
-offset_right = 396.0
+offset_left = 552.0
+offset_right = 616.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 16
@@ -51,19 +42,19 @@ text = "Time"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ColorRect2" type="ColorRect" parent="GameManager"]
+[node name="ColorRect" type="ColorRect" parent="GameManager"]
 z_index = 10
-offset_left = 516.0
+offset_left = 556.0
 offset_top = 12.0
-offset_right = 712.0
+offset_right = 724.0
 offset_bottom = 53.0
 scale = Vector2(1, 0.983716)
 color = Color(0, 0, 0.0392157, 1)
 
 [node name="ScoreLabel" type="Label" parent="GameManager"]
 z_index = 15
-offset_left = 580.0
-offset_right = 696.0
+offset_left = 396.0
+offset_right = 512.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 24
@@ -71,44 +62,22 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Votes" type="Label" parent="GameManager"]
-z_index = 15
-offset_left = 512.0
-offset_right = 580.0
-offset_bottom = 64.0
-theme_override_fonts/font = ExtResource("5_dlt0g")
-theme_override_font_sizes/font_size = 16
-text = "Votes"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="ColorRect3" type="ColorRect" parent="GameManager"]
+[node name="ColorRect2" type="ColorRect" parent="GameManager"]
 z_index = 10
-offset_left = 724.0
+offset_left = 332.0
 offset_top = 12.0
-offset_right = 848.0
+offset_right = 528.0
 offset_bottom = 53.0
 scale = Vector2(1, 0.983716)
 color = Color(0, 0, 0.0392157, 1)
 
-[node name="RankLabel" type="Label" parent="GameManager"]
+[node name="Votes" type="Label" parent="GameManager"]
 z_index = 15
-offset_left = 788.0
-offset_right = 832.0
-offset_bottom = 64.0
-theme_override_fonts/font = ExtResource("5_dlt0g")
-theme_override_font_sizes/font_size = 24
-text = "99"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Rank" type="Label" parent="GameManager"]
-z_index = 15
-offset_left = 720.0
-offset_right = 788.0
+offset_left = 328.0
+offset_right = 396.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 16
-text = "Rank"
+text = "Votes"
 horizontal_alignment = 2
 vertical_alignment = 1

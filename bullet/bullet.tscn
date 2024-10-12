@@ -1,17 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://c5n241jb8bdeo"]
 
-[ext_resource type="Script" path="res://bullet_kusabi.gd" id="1_7qsw6"]
-[ext_resource type="Texture2D" uid="uid://becslirck0nay" path="res://Bullet_1.png" id="1_o0qri"]
+[ext_resource type="Script" path="res://bullet/bullet.gd" id="1_7qsw6"]
+[ext_resource type="Texture2D" uid="uid://c2ya5s2kxj4h5" path="res://bullet/image (2)_R3.png" id="2_48ts4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u0pgg"]
 radius = 5.0
 
-[node name="BulletKusabi" type="Area2D"]
+[node name="BulletKusabi" type="Area2D" groups=["enemies"]]
 script = ExtResource("1_7qsw6")
+speed = 250
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 5
 texture_filter = 1
-texture = ExtResource("1_o0qri")
+rotation = 1.5708
+texture = ExtResource("2_48ts4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_u0pgg")

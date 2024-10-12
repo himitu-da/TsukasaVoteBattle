@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+@export var cylinder: PackedScene
+var last_time_shot = 0
+
 # 通常の移動速度
 @export var speed = 350
 # 低速移動時の速度
@@ -17,6 +20,12 @@ var initial_sprite_y_position = 0.0
 # 経過時間
 var time_passed = 0.0
 
+# 移動できる範囲を定義（例: 画面の左上 (100, 100) から右下 (700, 500) の範囲）
+@export var min_x = 20.0
+@export var max_x = 1260.0
+@export var min_y = 20.0
+@export var max_y = 700.0
+
 # 赤い円の表示状態を管理するフラグ
 var red_circle_visible = false
 
@@ -28,11 +37,17 @@ func _ready():
 	$RedCircle.visible = false
 
 func _process(delta):
+	# 時間追加
+	last_time_shot += delta
 	# 入力を受け取ってプレイヤーの動きを更新
 	handle_input()
+	
 	# 速度を適用して移動
 	velocity = movement_velocity
 	move_and_slide()
+	
+	# 移動範囲を制限する
+	limit_movement()
 
 	# スプライトのみ揺らす（当たり判定は動かさない）
 	float_sprite(delta)
@@ -52,6 +67,15 @@ func handle_input():
 		movement_velocity.y += 1
 	if Input.is_action_pressed("ui_up"):
 		movement_velocity.y -= 1
+		
+	if Input.is_action_pressed("ui_shot") && last_time_shot > 0.1:
+		var c1 = cylinder.instantiate()
+		var c2 = cylinder.instantiate()
+		c1.position = self.position + Vector2(20, 10)
+		c2.position = self.position + Vector2(20, -10)
+		get_tree().root.add_child(c1)
+		get_tree().root.add_child(c2)
+		last_time_shot = 0
 
 	# 速度を決定（Shiftキーが押されている場合は低速移動）
 	var current_speed = speed
@@ -60,6 +84,20 @@ func handle_input():
 
 	# 入力ベクトルを正規化して速度を掛け算
 	movement_velocity = movement_velocity.normalized() * current_speed
+
+# 移動範囲を制限する関数
+func limit_movement():
+	# X軸の範囲内に位置を制限
+	if position.x < min_x:
+		position.x = min_x
+	elif position.x > max_x:
+		position.x = max_x
+
+	# Y軸の範囲内に位置を制限
+	if position.y < min_y:
+		position.y = min_y
+	elif position.y > max_y:
+		position.y = max_y
 
 # スプライトを上下に揺らす動作
 func float_sprite(delta):
