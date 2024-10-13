@@ -4,17 +4,20 @@
 [ext_resource type="Texture2D" uid="uid://bdi7itrbl61s8" path="res://bullet/image (2)_R3.png" id="2_86ywg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u0pgg"]
-radius = 6.08276
+radius = 11.0
 
-[node name="BulletKusabi" type="Area2D" groups=["enemies"]]
+[node name="BulletKusabi" type="Area2D" groups=["danmaku"]]
 script = ExtResource("1_hb1pm")
 speed = 250
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 5
 texture_filter = 1
+position = Vector2(-1, 0)
 rotation = 1.5708
+scale = Vector2(3, 3)
 texture = ExtResource("2_86ywg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_u0pgg")
+debug_color = Color(0.893395, 0.0943834, 0.745344, 0.42)

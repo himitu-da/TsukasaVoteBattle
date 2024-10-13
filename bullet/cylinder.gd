@@ -13,11 +13,8 @@ var direction = Vector2(1, 0)
 
 
 func _ready():
-	connect("body_entered", Callable(self, "_on_body_entered"))
+	connect("area_entered", Callable(self, "_on_body_entered"))
 	# GameManager にアクセスする関数
-
-func get_game_manager():
-	return get_node("/root/MainGameScene/GameManager")
 
 func _process(delta: float):
 	position += direction * speed * delta
@@ -46,7 +43,7 @@ func is_off_screen() -> bool:
 func _on_body_entered(body):
 	if body.is_in_group("enemies"):
 		# 敵にダメージを与える処理
-		var game_manager = get_game_manager()
+		var game_manager = get_node("/root/MainGameScene/GameManager")
 		if game_manager:
 			game_manager.add_votes(1)
 		# 弾を削除

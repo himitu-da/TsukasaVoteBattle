@@ -69,7 +69,7 @@ var vote_thresholds = [
 ]
 
 # スコア（票数）
-var votes: int = 1553
+#var votes: int = 1553
 
 # UIラベルへの参照
 @onready var timer_label: Label = $TimerLabel
@@ -86,32 +86,39 @@ func _process(delta):
 	if remaining_time > 0:
 		remaining_time -= delta
 		remaining_time = max(remaining_time, 0.0)  # 負の値にならないように
+		
+		if remaining_time <= 0.0:
+			on_time_up()
+		
 		update_timer_label()
 
-		if remaining_time == 0.0:
-			on_time_up()
-
 func update_timer_label():
+	if remaining_time < 0:
+		remaining_time = 0.0
 	# 小数点以下2桁まで表示し、「秒」を追加
 	timer_label.text = "%.2f" % remaining_time
 
 func update_score_label():
 	# スコアを「票数: XXX」に表示
-	score_label.text = "%d" % votes
+	score_label.text = "%d" % GameData.votes
 	
 	# 順位を取得
-	var rank = get_rank(votes)
-	rank_label.text = "%d" % rank
+	GameData.rank = get_rank(GameData.votes)
+	rank_label.text = "%d" % GameData.rank
 
 func on_time_up():
 	print("時間切れ！ゲームオーバー")
 	# 例: ゲームオーバー画面に遷移する
-	# get_tree().change_scene("res://path_to_game_over_scene.tscn")
+	get_tree().change_scene("res://resultgamescene.tscn")
 	# スコアを表示するなどの処理を追加
 
 func add_votes(amount: int):
-	votes += amount
+	GameData.votes += amount
 	update_score_label()
+
+func change_time_limit(times: float):
+	remaining_time += times
+	update_timer_label()
 
 # 票数に基づいて順位を返す関数
 func get_rank(current_votes: int) -> int:

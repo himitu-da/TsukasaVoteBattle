@@ -20,6 +20,7 @@ var initial_sprite_y_position = 0.0
 # 経過時間
 var time_passed = 0.0
 
+
 # 移動できる範囲を定義（例: 画面の左上 (100, 100) から右下 (700, 500) の範囲）
 @export var min_x = 20.0
 @export var max_x = 1260.0
@@ -32,7 +33,6 @@ var red_circle_visible = false
 func _ready():
 	# スプライトの初期Y位置を記録
 	initial_sprite_y_position = $Sprite2D.position.y
-	
 	# 赤い円 (当たり判定可視化) の初期設定: 非表示
 	$RedCircle.visible = false
 
