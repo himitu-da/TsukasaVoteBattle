@@ -22,48 +22,58 @@ script = ExtResource("4_b3scd")
 
 [node name="ColorRect" type="ColorRect" parent="GameManager"]
 z_index = 10
-offset_left = 336.0
+offset_left = 360.0
 offset_top = 12.0
-offset_right = 504.0
+offset_right = 536.0
 offset_bottom = 53.0
 scale = Vector2(1, 0.983716)
 color = Color(0, 0, 0.0392157, 1)
 
 [node name="TimerLabel" type="Label" parent="GameManager"]
 z_index = 15
-offset_left = 396.0
-offset_right = 488.0
+offset_left = 408.0
+offset_right = 504.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 24
 text = "99.99"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Time" type="Label" parent="GameManager"]
 z_index = 15
-offset_left = 332.0
-offset_right = 384.0
+offset_left = 376.0
+offset_right = 412.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 16
-text = "時間"
+text = "残り"
+vertical_alignment = 1
+
+[node name="Time2" type="Label" parent="GameManager"]
+z_index = 15
+offset_left = 500.0
+offset_right = 520.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 16
+text = "秒"
 horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="ColorRect2" type="ColorRect" parent="GameManager"]
 z_index = 10
-offset_left = 516.0
+offset_left = 548.0
 offset_top = 12.0
-offset_right = 712.0
+offset_right = 768.0
 offset_bottom = 53.0
 scale = Vector2(1, 0.983716)
 color = Color(0, 0, 0.0392157, 1)
 
 [node name="ScoreLabel" type="Label" parent="GameManager"]
 z_index = 15
-offset_left = 580.0
-offset_right = 696.0
+offset_left = 608.0
+offset_right = 724.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 24
@@ -73,28 +83,38 @@ vertical_alignment = 1
 
 [node name="Votes" type="Label" parent="GameManager"]
 z_index = 15
-offset_left = 512.0
-offset_right = 580.0
+offset_left = 564.0
+offset_right = 628.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 16
 text = "投票数"
+vertical_alignment = 1
+
+[node name="Votes2" type="Label" parent="GameManager"]
+z_index = 15
+offset_left = 724.0
+offset_right = 752.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 16
+text = "票"
 horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="ColorRect3" type="ColorRect" parent="GameManager"]
 z_index = 10
-offset_left = 724.0
+offset_left = 780.0
 offset_top = 12.0
-offset_right = 848.0
+offset_right = 916.0
 offset_bottom = 53.0
 scale = Vector2(1, 0.983716)
 color = Color(0, 0, 0.0392157, 1)
 
 [node name="RankLabel" type="Label" parent="GameManager"]
 z_index = 15
-offset_left = 776.0
-offset_right = 832.0
+offset_left = 828.0
+offset_right = 872.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 24
@@ -104,11 +124,21 @@ vertical_alignment = 1
 
 [node name="Rank" type="Label" parent="GameManager"]
 z_index = 15
-offset_left = 720.0
-offset_right = 772.0
+offset_left = 796.0
+offset_right = 836.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 16
 text = "順位"
+vertical_alignment = 1
+
+[node name="Rank2" type="Label" parent="GameManager"]
+z_index = 15
+offset_left = 868.0
+offset_right = 900.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 16
+text = "位"
 horizontal_alignment = 2
 vertical_alignment = 1
