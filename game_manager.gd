@@ -76,6 +76,8 @@ var vote_thresholds = [
 @onready var score_label: Label = $ScoreLabel
 @onready var rank_label: Label = $RankLabel  # 順位表示用のLabel
 
+var isFinished = false
+
 func _ready():
 	remaining_time = time_limit
 	
@@ -87,8 +89,9 @@ func _process(delta):
 		remaining_time -= delta
 		remaining_time = max(remaining_time, 0.0)  # 負の値にならないように
 		
-		if remaining_time <= 0.0:
+		if remaining_time <= 0.0 and not isFinished:
 			on_time_up()
+			isFinished = true
 		
 		update_timer_label()
 
