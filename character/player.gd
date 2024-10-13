@@ -4,7 +4,7 @@ extends CharacterBody2D
 var last_time_shot = 0
 
 # 通常の移動速度
-@export var speed = 350
+@export var speed = 400
 # 低速移動時の速度
 @export var slow_speed = 150
 
