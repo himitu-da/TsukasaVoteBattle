@@ -1,7 +1,5 @@
 extends Area2D
 
-@export var big_hyou: PackedScene
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	connect("body_entered", Callable(self, "_on_something_entered"))
@@ -11,7 +9,7 @@ func _on_reset():
 	queue_free()
 
 func _process(delta):
-	self.position -= Vector2(2.5, 0)
+	self.position -= Vector2(5.5, 0)
 	
 	if is_off_screen():
 		print("delete hyou")
@@ -42,17 +40,9 @@ func is_off_screen() -> bool:
 
 func _on_something_entered(body):
 	if body.name == "player":
-		var game_manager = get_node("/root/MainGameScene/GameManager")
-		var o = max(game_manager.elapsed_time / 100.0, 0.6)
-		if GameData.get_random_true(o):
-			var h1 = duplicate()
-			h1.position = GameData.get_spawn_position()
-			call_deferred("add_hyou_to_scene", h1)
-		var p = max(game_manager.elapsed_time / 1000.0 - 0.03, 0.04)
-		if GameData.get_random_true(p):
-			var h2 = big_hyou.instantiate()
-			h2.position = GameData.get_spawn_position()
-			call_deferred("add_hyou_to_scene", h2)
+		#var h1 = duplicate()
+		#h1.position = GameData.get_spawn_position()
+		#call_deferred("add_hyou_to_scene", h1)
 		queue_free()
 
 func add_hyou_to_scene(hyou_instance):

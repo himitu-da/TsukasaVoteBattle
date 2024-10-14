@@ -11,15 +11,22 @@ extends Area2D
 
 var direction = Vector2(1, 0)
 @export var hyou: PackedScene
+@export var big_hyou: PackedScene
+
+var rng = RandomNumberGenerator.new()
 
 func _ready():
 	connect("area_entered", Callable(self, "_on_body_entered"))
-	# GameManager にアクセスする関数
+	GameData.connect("reset_signal", Callable(self, "_on_reset"))
+
+func _on_reset():
+	queue_free()
 
 func _process(delta: float):
 	position += direction * speed * delta
 	
 	if is_off_screen():
+		print("Delete Cylinder")
 		queue_free()
 
 func is_off_screen() -> bool:
@@ -45,9 +52,25 @@ func _on_body_entered(body):
 		# 敵にダメージを与える処理
 		var game_manager = get_node("/root/MainGameScene/GameManager")
 		if game_manager:
-			game_manager.add_votes(1)
-		var h1 = hyou.instantiate()
-		h1.position = self.position + Vector2(20, 10)
-		get_tree().root.add_child(h1)
-		# 弾を削除
+			game_manager.add_votes(GameData.power - 1)
+		
+		var p
+		var t = game_manager.elapsed_time
+		if t < 50:
+			p = 1
+		else:
+			p = 1.5 - t / 100.0
+		
+		if GameData.get_random_true(p):
+			var h1 = hyou.instantiate()
+			h1.position = self.position + Vector2(rng.randf_range(-50, 50), rng.randf_range(-50, 50))
+			call_deferred("add_hyou_to_scene", h1)
+		else:
+			var h1 = big_hyou.instantiate()
+			h1.position = self.position + Vector2(rng.randf_range(-50, 50), rng.randf_range(-50, 50))
+			call_deferred("add_hyou_to_scene", h1)
 		queue_free()
+		# 弾を削除
+
+func add_hyou_to_scene(hyou_instance):
+	get_tree().root.add_child(hyou_instance)

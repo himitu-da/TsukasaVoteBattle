@@ -1,23 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5n241jb8bdeo"]
+[gd_scene load_steps=4 format=3 uid="uid://jc0dlvn7vhfd"]
 
-[ext_resource type="Script" path="res://bullet/bullet_medium_blue.gd" id="1_hb1pm"]
-[ext_resource type="Texture2D" uid="uid://bdi7itrbl61s8" path="res://image/image (2)_R3.png" id="2_86ywg"]
+[ext_resource type="Script" path="res://bullet/bullet_medium_blue.gd" id="1_58jbm"]
+[ext_resource type="Texture2D" uid="uid://cqxsa43x42d6c" path="res://image/nc165950_【東方】弾幕素材_小弾_R3.png" id="2_oub6u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u0pgg"]
 radius = 9.05539
 
 [node name="BulletKusabi" type="Area2D" groups=["danmaku"]]
-script = ExtResource("1_hb1pm")
+script = ExtResource("1_58jbm")
 speed = 250
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.662745)
 z_index = 5
 texture_filter = 1
 rotation = 1.5708
 scale = Vector2(3, 3)
-texture = ExtResource("2_86ywg")
-offset = Vector2(0.3, 0.4)
-region_rect = Rect2(36.3529, 3.9959, 16.3385, 7.61645)
+texture = ExtResource("2_oub6u")
+region_enabled = true
+region_rect = Rect2(48, 0, 8, 8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_u0pgg")

@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsqpgod773wnt"]
+[gd_scene load_steps=9 format=3 uid="uid://bsqpgod773wnt"]
 
 [ext_resource type="Script" path="res://manualgamescene.gd" id="1_j68nq"]
 [ext_resource type="PackedScene" uid="uid://bbpru3vrea1fv" path="res://character/player.tscn" id="1_pqrnd"]
 [ext_resource type="FontFile" uid="uid://cip2th0qpjt52" path="res://ReggaeOne-Regular.ttf" id="2_dd4uj"]
 [ext_resource type="Script" path="res://top_button.gd" id="3_yxrva"]
+[ext_resource type="PackedScene" uid="uid://b75sbodcgwbs4" path="res://character/hyou.tscn" id="5_fio6a"]
+[ext_resource type="PackedScene" uid="uid://b54hmoj04004k" path="res://character/big_hyou.tscn" id="6_wi578"]
+[ext_resource type="PackedScene" uid="uid://dpgt4eo26u6a2" path="res://character/mega_hyou.tscn" id="7_nkccl"]
+[ext_resource type="PackedScene" uid="uid://dwvu0feq8ke76" path="res://character/giga_hyou.tscn" id="8_du5kk"]
 
 [node name="Manualgamescene" type="Control"]
 layout_mode = 3
@@ -40,7 +44,52 @@ theme_override_font_sizes/font_size = 32
 text = "移動	　　　矢印キー or WASDキー
 低速移動　Shift or Enter
 ショット　Zキー or ]キー
-ボム　　　Xキー or :キー"
+ボム　　　Xキー or :キー
+
+プレイ中にやり直す
+Escキー　→　Escキー
+プレイ中にトップに戻る
+Escキー　→　Tキー"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1152.0
+offset_top = 68.0
+offset_right = 1308.0
+offset_bottom = 176.0
+theme_override_fonts/font = ExtResource("2_dd4uj")
+theme_override_font_sizes/font_size = 32
+text = "1票"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 944.0
+offset_top = 121.0
+offset_right = 1100.0
+offset_bottom = 229.0
+theme_override_fonts/font = ExtResource("2_dd4uj")
+theme_override_font_sizes/font_size = 32
+text = "10票"
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1132.0
+offset_top = 316.0
+offset_right = 1288.0
+offset_bottom = 424.0
+theme_override_fonts/font = ExtResource("2_dd4uj")
+theme_override_font_sizes/font_size = 32
+text = "100票"
+
+[node name="Label5" type="Label" parent="."]
+layout_mode = 0
+offset_left = 916.0
+offset_top = 416.0
+offset_right = 1072.0
+offset_bottom = 524.0
+theme_override_fonts/font = ExtResource("2_dd4uj")
+theme_override_font_sizes/font_size = 32
+text = "1000票"
 
 [node name="TopButton" type="Button" parent="."]
 z_index = 15
@@ -54,5 +103,21 @@ theme_override_font_sizes/font_size = 36
 text = "トップに戻る
 （Tキー）"
 script = ExtResource("3_yxrva")
+
+[node name="Hyou" parent="." instance=ExtResource("5_fio6a")]
+position = Vector2(1152, 128)
+script = null
+
+[node name="Hyou2" parent="." instance=ExtResource("6_wi578")]
+position = Vector2(1024, 192)
+script = null
+
+[node name="Hyou3" parent="." instance=ExtResource("7_nkccl")]
+position = Vector2(1126, 291)
+script = null
+
+[node name="Hyou4" parent="." instance=ExtResource("8_du5kk")]
+position = Vector2(1009, 376)
+script = null
 
 [connection signal="pressed" from="TopButton" to="TopButton" method="_on_play_button_pressed"]

@@ -1,15 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://cug84g4qoaxli"]
+[gd_scene load_steps=10 format=3 uid="uid://cug84g4qoaxli"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqgomifh0ir" path="res://character/enemy.tscn" id="1_xs1ut"]
 [ext_resource type="PackedScene" uid="uid://bbpru3vrea1fv" path="res://character/player.tscn" id="2_nn40t"]
 [ext_resource type="PackedScene" uid="uid://c5n241jb8bdeo" path="res://bullet/bullet_medium_blue.tscn" id="3_25e3r"]
 [ext_resource type="Script" path="res://game_manager.gd" id="4_b3scd"]
 [ext_resource type="FontFile" uid="uid://cip2th0qpjt52" path="res://ReggaeOne-Regular.ttf" id="5_dlt0g"]
+[ext_resource type="PackedScene" uid="uid://nfn8gjwippr1" path="res://character/powerup.tscn" id="5_lk2i5"]
 [ext_resource type="Script" path="res://music_manager.gd" id="6_de3qo"]
+[ext_resource type="AudioStream" uid="uid://yympb4422eke" path="res://music/countdown.mp3" id="7_vd0yr"]
+[ext_resource type="AudioStream" uid="uid://dh0gxogm0dqca" path="res://music/finish.mp3" id="8_3qgj0"]
 
 [node name="MainGameScene" type="Node2D"]
 
-[node name="enemy" parent="." instance=ExtResource("1_xs1ut")]
+[node name="enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_xs1ut")]
 position = Vector2(1024, 384)
 slide_on_ceiling = false
 player = NodePath("../player")
@@ -18,8 +21,11 @@ bullet = ExtResource("3_25e3r")
 [node name="player" parent="." instance=ExtResource("2_nn40t")]
 position = Vector2(256, 384)
 
-[node name="GameManager" type="Node" parent="."]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("count_down_se", "finish_se")]
 script = ExtResource("4_b3scd")
+count_down_se = NodePath("../MusicManager/CountDown")
+finish_se = NodePath("../MusicManager/Finish")
+power_up_item = ExtResource("5_lk2i5")
 
 [node name="ColorRect" type="ColorRect" parent="GameManager"]
 modulate = Color(1, 1, 1, 0.882353)
@@ -168,9 +174,9 @@ vertical_alignment = 1
 [node name="ColorRect4" type="ColorRect" parent="GameManager"]
 modulate = Color(1, 1, 1, 0.882353)
 z_index = 10
-offset_left = 648.0
+offset_left = 740.0
 offset_top = 668.0
-offset_right = 772.0
+offset_right = 864.0
 offset_bottom = 709.0
 scale = Vector2(1, 0.983716)
 color = Color(0, 0, 0.0392157, 1)
@@ -203,9 +209,9 @@ vertical_alignment = 1
 [node name="ColorRect5" type="ColorRect" parent="GameManager"]
 modulate = Color(1, 1, 1, 0.882353)
 z_index = 10
-offset_left = 508.0
+offset_left = 600.0
 offset_top = 668.0
-offset_right = 632.0
+offset_right = 724.0
 offset_bottom = 709.0
 scale = Vector2(1, 0.983716)
 color = Color(0, 0, 0.0392157, 1)
@@ -238,9 +244,9 @@ vertical_alignment = 1
 [node name="ColorRect6" type="ColorRect" parent="GameManager"]
 modulate = Color(1, 1, 1, 0.882353)
 z_index = 10
-offset_left = 256.0
+offset_left = 348.0
 offset_top = 668.0
-offset_right = 492.0
+offset_right = 584.0
 offset_bottom = 709.0
 scale = Vector2(1, 0.983716)
 color = Color(0, 0, 0.0392157, 1)
@@ -286,9 +292,9 @@ vertical_alignment = 1
 [node name="ColorRect7" type="ColorRect" parent="GameManager"]
 modulate = Color(1, 1, 1, 0.882353)
 z_index = 10
-offset_left = 788.0
+offset_left = 880.0
 offset_top = 668.0
-offset_right = 1024.0
+offset_right = 1116.0
 offset_bottom = 709.0
 scale = Vector2(1, 0.983716)
 color = Color(0, 0, 0.0392157, 1)
@@ -331,6 +337,54 @@ text = "票"
 horizontal_alignment = 2
 vertical_alignment = 1
 
+[node name="ColorRect8" type="ColorRect" parent="GameManager"]
+modulate = Color(1, 1, 1, 0.882353)
+z_index = 10
+offset_left = 164.0
+offset_top = 668.0
+offset_right = 332.0
+offset_bottom = 709.0
+scale = Vector2(1, 0.983716)
+color = Color(0, 0, 0.0392157, 1)
+
+[node name="PowerLabel" type="Label" parent="GameManager/ColorRect8"]
+z_index = 15
+layout_mode = 0
+offset_left = 84.0
+offset_top = -12.0
+offset_right = 124.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 24
+text = "99"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Votes" type="Label" parent="GameManager/ColorRect8"]
+z_index = 15
+layout_mode = 0
+offset_left = 16.0
+offset_top = -12.0
+offset_right = 88.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 16
+text = "弾攻撃力"
+vertical_alignment = 1
+
+[node name="Votes2" type="Label" parent="GameManager/ColorRect8"]
+z_index = 15
+layout_mode = 0
+offset_left = 124.0
+offset_top = -12.1986
+offset_right = 152.0
+offset_bottom = 51.8014
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 16
+text = "票"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="StartLabel" type="Label" parent="GameManager"]
 anchors_preset = 8
 anchor_left = 0.5
@@ -349,8 +403,73 @@ text = "Zキー or ]キー でスタート"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="FinishLabel" type="Label" parent="GameManager"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -232.0
+offset_top = -24.0
+offset_right = 232.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 42
+text = "タイムアップ！
+（まだ票は獲得できるよ！）"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RetryLabel" type="Label" parent="GameManager"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -232.0
+offset_top = -24.0
+offset_right = 232.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 42
+text = "5秒以内にもう一度Escキーを押すと
+やり直せるよ
+Tキーでトップに戻るよ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RetryLabel2" type="Label" parent="GameManager"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -632.0
+offset_top = -352.0
+offset_right = -526.0
+offset_bottom = -328.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 16
+text = "やり直し: Esc"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MusicManager" type="Node" parent="."]
 script = ExtResource("6_de3qo")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 volume_db = -20.0
+
+[node name="CountDown" type="AudioStreamPlayer" parent="MusicManager"]
+stream = ExtResource("7_vd0yr")
+volume_db = -18.0
+
+[node name="Finish" type="AudioStreamPlayer" parent="MusicManager"]
+stream = ExtResource("8_3qgj0")
+volume_db = -15.0

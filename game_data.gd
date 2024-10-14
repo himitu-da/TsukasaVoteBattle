@@ -1,14 +1,17 @@
 extends Node
 
 var votes = 1553  # 投票数
+var ever_votes = 0
 var rank = 61  # 順位
 var hidan = 0 # 被弾数
 var bomb = 0 # ボム数
 var bomb_dec = 50
 var hidan_dec = 100
 var is_game_started = false
+var power = 2
 
 signal finish_signal()
+signal reset_signal()
 
 # 順位基準リスト（降順）
 var vote_thresholds = [
@@ -76,10 +79,13 @@ var vote_thresholds = [
 ]
 
 func reset():
+	emit_signal("reset_signal")
 	votes = 1553
+	ever_votes = 0
 	rank = 61
 	hidan = 0
 	bomb = 0
+	power = 2
 	is_game_started = false
 
 # 票数に基づいて順位を返す関数
@@ -93,10 +99,19 @@ func get_character_by_rank(current_rank: int) -> String:
 	return GameData.vote_thresholds[current_rank - 1][0]
 
 func get_bomb_dec() -> int:
-	return (hidan + bomb + 1) * 30
+	return (hidan + bomb + 1) * 20
 
 func get_hidan_dec() -> int:
-	return (hidan + bomb + 1) * 60
+	return (hidan + bomb + 1) * 100
 
 func emit_finish_signal():
 	emit_signal("finish_signal")
+	is_game_started = false
+
+func get_spawn_position() -> Vector2:
+	var rng = RandomNumberGenerator.new()
+	return Vector2( 1260 + rng.randf_range(-5, 5), rng.randf_range(120, 600))
+
+func get_random_true(p) -> bool:
+	var rng = RandomNumberGenerator.new()
+	return rng.randf() < p

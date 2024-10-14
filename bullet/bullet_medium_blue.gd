@@ -10,6 +10,10 @@ func _ready():
 	connect("body_entered", Callable(self, "_on_body_entered"))
 	connect("area_entered", Callable(self, "_on_area_entered"))
 	GameData.connect("finish_signal", Callable(self, "_on_finish"))
+	GameData.connect("reset_signal", Callable(self, "_on_reset"))
+
+func _on_reset():
+	queue_free()
 
 func _process(delta):
 	# 弾を指定方向に移動させる
@@ -18,6 +22,7 @@ func _process(delta):
 	
 	# 画面外に出たら削除
 	if position.x < 0 or position.x > get_viewport_rect().size.x or position.y < 0 or position.y > get_viewport_rect().size.y:
+		print("Delete bullet")
 		queue_free()
 
 # 弾の移動方向をセットする関数

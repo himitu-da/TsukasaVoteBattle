@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var cylinder: PackedScene
 @export var bomb_aura: PackedScene
 
+var game_manager
+
 # 直近のショット
 var last_time_shot = 0
 # 直近のボム
@@ -41,6 +43,7 @@ func _ready():
 	initial_sprite_y_position = $Sprite2D.position.y
 	# 赤い円 (当たり判定可視化) の初期設定: 非表示
 	$RedCircle.visible = false
+	game_manager = get_node("/root/MainGameScene/GameManager")
 
 func _process(delta):
 	if GameData.is_game_started:
@@ -77,12 +80,11 @@ func handle_input():
 		movement_velocity.y -= 1
 		
 	if Input.is_action_pressed("ui_shot") && last_time_shot >= 0.1:
-		var c1 = cylinder.instantiate()
-		var c2 = cylinder.instantiate()
-		c1.position = self.position + Vector2(20, 10)
-		c2.position = self.position + Vector2(20, -10)
-		get_tree().root.add_child(c1)
-		get_tree().root.add_child(c2)
+		
+		for i in range((GameData.power - 1) * -5 - 5, (GameData.power - 1) * 5 + 6, 20):
+			var c1 = cylinder.instantiate()
+			c1.position = self.position + Vector2(20, i)
+			get_tree().root.add_child(c1)
 		$CylinderSE.play()
 		last_time_shot = 0
 	
@@ -135,16 +137,36 @@ func update_collision_visibility():
 	else:
 		$RedCircle.visible = false
 
+
 func _on_something_entered(body):
 	if body.is_in_group("danmaku"):
-		var game_manager = get_node("/root/MainGameScene/GameManager")
+		var b1 = bomb_aura.instantiate()
+		b1.position = self.position
+		call_deferred("add", b1)
 		if game_manager:
 			game_manager.change_time_limit(-5)
 			game_manager.add_votes(-1 * GameData.get_hidan_dec())
 		GameData.hidan += 1
 		$HidanSe.play()
 	if body.is_in_group("hyou"):
-		var game_manager = get_node("/root/MainGameScene/GameManager")
 		if game_manager:
 			game_manager.add_votes(1)
 		$HyouSE.play()
+	if body.is_in_group("big_hyou"):
+		if game_manager:
+			game_manager.add_votes(10)
+		$HyouSE.play()
+	if body.is_in_group("mega_hyou"):
+		if game_manager:
+			game_manager.add_votes(100)
+		$HyouSE.play()
+	if body.is_in_group("giga_hyou"):
+		if game_manager:
+			game_manager.add_votes(1000)
+		$HyouSE.play()
+	if body.is_in_group("powerup"):
+		GameData.power += 1
+		$HyouSE.play()
+
+func add(b1):
+	get_tree().root.add_child(b1)

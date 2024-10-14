@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b54hmoj04004k"]
+
+[ext_resource type="Script" path="res://character/big_hyou.gd" id="1_2e32t"]
+[ext_resource type="PackedScene" uid="uid://dpgt4eo26u6a2" path="res://character/mega_hyou.tscn" id="2_7g3sf"]
+[ext_resource type="Texture2D" uid="uid://cxed2jw6y1go7" path="res://image/System_Icons.png" id="2_eeua2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l1tao"]
+radius = 40.0
+height = 160.0
+
+[node name="Hyou" type="Area2D" groups=["big_hyou"]]
+script = ExtResource("1_2e32t")
+mega_hyou = ExtResource("2_7g3sf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_l1tao")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("2_eeua2")
+region_enabled = true
+region_rect = Rect2(95.9234, 111.894, 15.1862, 15.3249)

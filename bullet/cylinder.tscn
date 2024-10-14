@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://47apbculcscx"]
+[gd_scene load_steps=6 format=3 uid="uid://47apbculcscx"]
 
 [ext_resource type="Texture2D" uid="uid://dsw10e15javn" path="res://image/cylinder.png" id="1_f326c"]
 [ext_resource type="Script" path="res://bullet/cylinder.gd" id="1_yhago"]
 [ext_resource type="PackedScene" uid="uid://b75sbodcgwbs4" path="res://character/hyou.tscn" id="3_0gjfh"]
+[ext_resource type="PackedScene" uid="uid://b54hmoj04004k" path="res://character/big_hyou.tscn" id="3_0v8ly"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gttmi"]
 size = Vector2(22, 10)
@@ -11,6 +12,7 @@ size = Vector2(22, 10)
 script = ExtResource("1_yhago")
 speed = 1200
 hyou = ExtResource("3_0gjfh")
+big_hyou = ExtResource("3_0v8ly")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 6

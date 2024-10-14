@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://nfn8gjwippr1"]
+
+[ext_resource type="Script" path="res://character/powerup.gd" id="1_5uy51"]
+[ext_resource type="Texture2D" uid="uid://cxed2jw6y1go7" path="res://image/System_Icons.png" id="1_gyg0e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vgj51"]
+radius = 24.0
+height = 112.0
+
+[node name="Powerup" type="Area2D" groups=["powerup"]]
+script = ExtResource("1_5uy51")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_vgj51")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_gyg0e")
+region_enabled = true
+region_rect = Rect2(64, 112, 15, 15)
