@@ -37,23 +37,25 @@ var red_circle_visible = false
 
 func _ready():
 	# スプライトの初期Y位置を記録
+	$Area2D.connect("area_entered", Callable(self, "_on_something_entered"))
 	initial_sprite_y_position = $Sprite2D.position.y
 	# 赤い円 (当たり判定可視化) の初期設定: 非表示
 	$RedCircle.visible = false
 
 func _process(delta):
-	# 時間追加
-	last_time_shot += delta
-	last_time_bomb += delta
-	# 入力を受け取ってプレイヤーの動きを更新
-	handle_input()
-	
-	# 速度を適用して移動
-	velocity = movement_velocity
-	move_and_slide()
-	
-	# 移動範囲を制限する
-	limit_movement()
+	if GameData.is_game_started:
+		# 時間追加
+		last_time_shot += delta
+		last_time_bomb += delta
+		# 入力を受け取ってプレイヤーの動きを更新
+		handle_input()
+		
+		# 速度を適用して移動
+		velocity = movement_velocity
+		move_and_slide()
+		
+		# 移動範囲を制限する
+		limit_movement()
 
 	# スプライトのみ揺らす（当たり判定は動かさない）
 	float_sprite(delta)
@@ -74,21 +76,26 @@ func handle_input():
 	if Input.is_action_pressed("ui_up"):
 		movement_velocity.y -= 1
 		
-	if Input.is_action_pressed("ui_shot") && last_time_shot > 0.1:
+	if Input.is_action_pressed("ui_shot") && last_time_shot >= 0.1:
 		var c1 = cylinder.instantiate()
 		var c2 = cylinder.instantiate()
 		c1.position = self.position + Vector2(20, 10)
 		c2.position = self.position + Vector2(20, -10)
 		get_tree().root.add_child(c1)
 		get_tree().root.add_child(c2)
+		$CylinderSE.play()
 		last_time_shot = 0
 	
 	# ボム
-	if Input.is_action_pressed("ui_bomb") && last_time_bomb > 5:
+	if Input.is_action_pressed("ui_bomb") && last_time_bomb >= 5:
 		var b1 = bomb_aura.instantiate()
 		b1.position = self.position
 		get_tree().root.add_child(b1)
+		var game_manager = get_node("/root/MainGameScene/GameManager")
+		if game_manager:
+			game_manager.add_votes(-1 * GameData.get_hidan_dec())
 		GameData.bomb += 1
+		$BombSE.play()
 		last_time_bomb = 0
 
 	# 速度を決定（Shiftキーが押されている場合は低速移動）
@@ -127,3 +134,17 @@ func update_collision_visibility():
 		$RedCircle.visible = true
 	else:
 		$RedCircle.visible = false
+
+func _on_something_entered(body):
+	if body.is_in_group("danmaku"):
+		var game_manager = get_node("/root/MainGameScene/GameManager")
+		if game_manager:
+			game_manager.change_time_limit(-5)
+			game_manager.add_votes(-1 * GameData.get_hidan_dec())
+		GameData.hidan += 1
+		$HidanSe.play()
+	if body.is_in_group("hyou"):
+		var game_manager = get_node("/root/MainGameScene/GameManager")
+		if game_manager:
+			game_manager.add_votes(1)
+		$HyouSE.play()

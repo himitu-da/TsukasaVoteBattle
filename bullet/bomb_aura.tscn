@@ -11,9 +11,9 @@ script = ExtResource("1_1jhyb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-10, 0)
 scale = Vector2(3, 3)
 texture = ExtResource("1_tu5k5")
+offset = Vector2(-3, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["bomb_aura"]]
 scale = Vector2(3, 3)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cug84g4qoaxli"]
+[gd_scene load_steps=7 format=3 uid="uid://cug84g4qoaxli"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqgomifh0ir" path="res://character/enemy.tscn" id="1_xs1ut"]
 [ext_resource type="PackedScene" uid="uid://bbpru3vrea1fv" path="res://character/player.tscn" id="2_nn40t"]
 [ext_resource type="PackedScene" uid="uid://c5n241jb8bdeo" path="res://bullet/bullet_medium_blue.tscn" id="3_25e3r"]
 [ext_resource type="Script" path="res://game_manager.gd" id="4_b3scd"]
 [ext_resource type="FontFile" uid="uid://cip2th0qpjt52" path="res://ReggaeOne-Regular.ttf" id="5_dlt0g"]
+[ext_resource type="Script" path="res://music_manager.gd" id="6_de3qo"]
 
 [node name="MainGameScene" type="Node2D"]
 
@@ -15,46 +16,53 @@ player = NodePath("../player")
 bullet = ExtResource("3_25e3r")
 
 [node name="player" parent="." instance=ExtResource("2_nn40t")]
-position = Vector2(192, 384)
+position = Vector2(256, 384)
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("4_b3scd")
 
 [node name="ColorRect" type="ColorRect" parent="GameManager"]
+modulate = Color(1, 1, 1, 0.882353)
 z_index = 10
-offset_left = 360.0
+offset_left = 356.0
 offset_top = 12.0
 offset_right = 536.0
 offset_bottom = 53.0
 scale = Vector2(1, 0.983716)
 color = Color(0, 0, 0.0392157, 1)
 
-[node name="TimerLabel" type="Label" parent="GameManager"]
+[node name="TimerLabel" type="Label" parent="GameManager/ColorRect"]
 z_index = 15
-offset_left = 408.0
-offset_right = 504.0
-offset_bottom = 64.0
+layout_mode = 0
+offset_left = 52.0
+offset_top = -12.1986
+offset_right = 148.0
+offset_bottom = 51.8014
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 24
 text = "99.99"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Time" type="Label" parent="GameManager"]
+[node name="Time" type="Label" parent="GameManager/ColorRect"]
 z_index = 15
-offset_left = 376.0
-offset_right = 412.0
-offset_bottom = 64.0
+layout_mode = 0
+offset_left = 16.0
+offset_top = -12.1986
+offset_right = 52.0
+offset_bottom = 51.8014
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 16
 text = "残り"
 vertical_alignment = 1
 
-[node name="Time2" type="Label" parent="GameManager"]
+[node name="Time2" type="Label" parent="GameManager/ColorRect"]
 z_index = 15
-offset_left = 500.0
-offset_right = 520.0
-offset_bottom = 64.0
+layout_mode = 0
+offset_left = 144.0
+offset_top = -12.1986
+offset_right = 164.0
+offset_bottom = 51.8014
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 16
 text = "秒"
@@ -62,40 +70,47 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="ColorRect2" type="ColorRect" parent="GameManager"]
+modulate = Color(1, 1, 1, 0.882353)
 z_index = 10
-offset_left = 548.0
+offset_left = 552.0
 offset_top = 12.0
-offset_right = 768.0
+offset_right = 772.0
 offset_bottom = 53.0
 scale = Vector2(1, 0.983716)
 color = Color(0, 0, 0.0392157, 1)
 
-[node name="ScoreLabel" type="Label" parent="GameManager"]
+[node name="ScoreLabel" type="Label" parent="GameManager/ColorRect2"]
 z_index = 15
-offset_left = 608.0
-offset_right = 724.0
-offset_bottom = 64.0
+layout_mode = 0
+offset_left = 60.0
+offset_top = -12.1986
+offset_right = 176.0
+offset_bottom = 51.8014
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 24
 text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Votes" type="Label" parent="GameManager"]
+[node name="Votes" type="Label" parent="GameManager/ColorRect2"]
 z_index = 15
-offset_left = 564.0
-offset_right = 628.0
-offset_bottom = 64.0
+layout_mode = 0
+offset_left = 16.0
+offset_top = -12.1986
+offset_right = 80.0
+offset_bottom = 51.8014
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 16
 text = "投票数"
 vertical_alignment = 1
 
-[node name="Votes2" type="Label" parent="GameManager"]
+[node name="Votes2" type="Label" parent="GameManager/ColorRect2"]
 z_index = 15
-offset_left = 724.0
-offset_right = 752.0
-offset_bottom = 64.0
+layout_mode = 0
+offset_left = 176.0
+offset_top = -12.1986
+offset_right = 204.0
+offset_bottom = 51.8014
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 16
 text = "票"
@@ -103,42 +118,239 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="ColorRect3" type="ColorRect" parent="GameManager"]
+modulate = Color(1, 1, 1, 0.882353)
 z_index = 10
-offset_left = 780.0
+offset_left = 788.0
 offset_top = 12.0
-offset_right = 916.0
+offset_right = 924.0
 offset_bottom = 53.0
 scale = Vector2(1, 0.983716)
 color = Color(0, 0, 0.0392157, 1)
 
-[node name="RankLabel" type="Label" parent="GameManager"]
+[node name="RankLabel" type="Label" parent="GameManager/ColorRect3"]
 z_index = 15
-offset_left = 828.0
-offset_right = 872.0
-offset_bottom = 64.0
+layout_mode = 0
+offset_left = 48.0
+offset_top = -12.1986
+offset_right = 92.0
+offset_bottom = 51.8014
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 24
 text = "99"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Rank" type="Label" parent="GameManager"]
+[node name="Rank" type="Label" parent="GameManager/ColorRect3"]
 z_index = 15
-offset_left = 796.0
-offset_right = 836.0
-offset_bottom = 64.0
+layout_mode = 0
+offset_left = 16.0
+offset_top = -12.1986
+offset_right = 56.0
+offset_bottom = 51.8014
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 16
 text = "順位"
 vertical_alignment = 1
 
-[node name="Rank2" type="Label" parent="GameManager"]
+[node name="Rank2" type="Label" parent="GameManager/ColorRect3"]
 z_index = 15
-offset_left = 868.0
-offset_right = 900.0
-offset_bottom = 64.0
+layout_mode = 0
+offset_left = 88.0
+offset_top = -12.1986
+offset_right = 120.0
+offset_bottom = 51.8014
 theme_override_fonts/font = ExtResource("5_dlt0g")
 theme_override_font_sizes/font_size = 16
 text = "位"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="ColorRect4" type="ColorRect" parent="GameManager"]
+modulate = Color(1, 1, 1, 0.882353)
+z_index = 10
+offset_left = 648.0
+offset_top = 668.0
+offset_right = 772.0
+offset_bottom = 709.0
+scale = Vector2(1, 0.983716)
+color = Color(0, 0, 0.0392157, 1)
+
+[node name="HidanLabel" type="Label" parent="GameManager/ColorRect4"]
+z_index = 15
+layout_mode = 0
+offset_left = 64.0
+offset_top = -12.1986
+offset_right = 108.0
+offset_bottom = 51.8014
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 24
+text = "99"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Hidan" type="Label" parent="GameManager/ColorRect4"]
+z_index = 15
+layout_mode = 0
+offset_left = 16.0
+offset_top = -12.1986
+offset_right = 56.0
+offset_bottom = 51.8014
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 16
+text = "被弾数"
+vertical_alignment = 1
+
+[node name="ColorRect5" type="ColorRect" parent="GameManager"]
+modulate = Color(1, 1, 1, 0.882353)
+z_index = 10
+offset_left = 508.0
+offset_top = 668.0
+offset_right = 632.0
+offset_bottom = 709.0
+scale = Vector2(1, 0.983716)
+color = Color(0, 0, 0.0392157, 1)
+
+[node name="BombLabel" type="Label" parent="GameManager/ColorRect5"]
+z_index = 15
+layout_mode = 0
+offset_left = 64.0
+offset_top = -12.1986
+offset_right = 108.0
+offset_bottom = 51.8014
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 24
+text = "99"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Bomb" type="Label" parent="GameManager/ColorRect5"]
+z_index = 15
+layout_mode = 0
+offset_left = 16.0
+offset_top = -12.1986
+offset_right = 56.0
+offset_bottom = 51.8014
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 16
+text = "ボム数"
+vertical_alignment = 1
+
+[node name="ColorRect6" type="ColorRect" parent="GameManager"]
+modulate = Color(1, 1, 1, 0.882353)
+z_index = 10
+offset_left = 256.0
+offset_top = 668.0
+offset_right = 492.0
+offset_bottom = 709.0
+scale = Vector2(1, 0.983716)
+color = Color(0, 0, 0.0392157, 1)
+
+[node name="BombDecLabel" type="Label" parent="GameManager/ColorRect6"]
+z_index = 15
+layout_mode = 0
+offset_left = 116.0
+offset_top = -12.0
+offset_right = 192.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 24
+text = "9999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Votes" type="Label" parent="GameManager/ColorRect6"]
+z_index = 15
+layout_mode = 0
+offset_left = 16.0
+offset_top = -12.1986
+offset_right = 80.0
+offset_bottom = 51.8014
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 16
+text = "ボム消費票数"
+vertical_alignment = 1
+
+[node name="Votes2" type="Label" parent="GameManager/ColorRect6"]
+z_index = 15
+layout_mode = 0
+offset_left = 192.0
+offset_top = -12.1986
+offset_right = 220.0
+offset_bottom = 51.8014
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 16
+text = "票"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ColorRect7" type="ColorRect" parent="GameManager"]
+modulate = Color(1, 1, 1, 0.882353)
+z_index = 10
+offset_left = 788.0
+offset_top = 668.0
+offset_right = 1024.0
+offset_bottom = 709.0
+scale = Vector2(1, 0.983716)
+color = Color(0, 0, 0.0392157, 1)
+
+[node name="HidanDecLabel" type="Label" parent="GameManager/ColorRect7"]
+z_index = 15
+layout_mode = 0
+offset_left = 116.0
+offset_top = -12.0
+offset_right = 192.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 24
+text = "9999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Votes" type="Label" parent="GameManager/ColorRect7"]
+z_index = 15
+layout_mode = 0
+offset_left = 16.0
+offset_top = -12.1986
+offset_right = 112.0
+offset_bottom = 51.8014
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 16
+text = "被弾減少票数"
+vertical_alignment = 1
+
+[node name="Votes2" type="Label" parent="GameManager/ColorRect7"]
+z_index = 15
+layout_mode = 0
+offset_left = 192.0
+offset_top = -12.1986
+offset_right = 220.0
+offset_bottom = 51.8014
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 16
+text = "票"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="StartLabel" type="Label" parent="GameManager"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -232.0
+offset_top = -24.0
+offset_right = 232.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_dlt0g")
+theme_override_font_sizes/font_size = 32
+text = "Zキー or ]キー でスタート"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MusicManager" type="Node" parent="."]
+script = ExtResource("6_de3qo")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
+volume_db = -20.0

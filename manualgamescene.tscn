@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsqpgod773wnt"]
+
+[ext_resource type="Script" path="res://manualgamescene.gd" id="1_j68nq"]
+[ext_resource type="PackedScene" uid="uid://bbpru3vrea1fv" path="res://character/player.tscn" id="1_pqrnd"]
+[ext_resource type="FontFile" uid="uid://cip2th0qpjt52" path="res://ReggaeOne-Regular.ttf" id="2_dd4uj"]
+[ext_resource type="Script" path="res://top_button.gd" id="3_yxrva"]
+
+[node name="Manualgamescene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j68nq")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_pqrnd")]
+position = Vector2(640, 360)
+
+[node name="Story" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 640.0
+offset_right = 1090.0
+offset_bottom = 713.0
+theme_override_fonts/font = ExtResource("2_dd4uj")
+theme_override_font_sizes/font_size = 24
+text = "ケモノキャラクターの「菅牧典」は、なんと今回14位も順位が落ちてしまって61位に！
+票数を増やして、ケモノ界のトップ（15位）になって、あわよくば1位に。対戦相手は、博麗霊夢。
+"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 544.0
+offset_bottom = 233.0
+theme_override_fonts/font = ExtResource("2_dd4uj")
+theme_override_font_sizes/font_size = 32
+text = "移動	　　　矢印キー or WASDキー
+低速移動　Shift or Enter
+ショット　Zキー or ]キー
+ボム　　　Xキー or :キー"
+
+[node name="TopButton" type="Button" parent="."]
+z_index = 15
+layout_mode = 0
+offset_left = 992.0
+offset_top = 544.0
+offset_right = 1248.0
+offset_bottom = 672.0
+theme_override_fonts/font = ExtResource("2_dd4uj")
+theme_override_font_sizes/font_size = 36
+text = "トップに戻る
+（Tキー）"
+script = ExtResource("3_yxrva")
+
+[connection signal="pressed" from="TopButton" to="TopButton" method="_on_play_button_pressed"]

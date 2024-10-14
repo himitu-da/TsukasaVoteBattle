@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs4bp37rhbqw8"]
+
+[ext_resource type="AudioStream" uid="uid://butgtakfsa73g" path="res://music/hidan.mp3" id="1_fhv0g"]
+
+[node name="HidanSe" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_fhv0g")
+volume_db = -20.0

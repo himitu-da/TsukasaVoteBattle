@@ -3,7 +3,6 @@ extends CharacterBody2D
 # プレイヤーのノードパス
 @export var player: NodePath
 @export var bullet: PackedScene
-var v = 1
 var bullet_direction = 0
 
 var delta_direction = 0
@@ -21,27 +20,37 @@ func _ready():
 	initial_y_position = position.y
 
 func _process(delta):
+	if GameData.is_game_started:
+		time_passed += delta
+		
+		if GameData.rank > 55:
+			phase1()
+		elif GameData.rank > 50:
+			phase2()
+		time_passed += delta
+		position.y = initial_y_position + sin(time_passed * float_speed) * float_amplitude
+
+func phase1():
+	print(delta_direction)
+	if delta_direction > 25:
+		delta_d = -1.0
+	if delta_direction < 15:
+		delta_d = 1.0
+	delta_direction += delta_d * 0.1
+	bullet_direction = fmod(bullet_direction, 360.0) + delta_direction
 	fire_bullet_straight(bullet_direction)
-	time_passed += delta
-	
-	if delta_direction > 1:
+
+func phase2():
+	if delta_direction > 10:
 		delta_d = -1
-	if delta_direction < -1:
+	if delta_direction < 5:
 		delta_d = 1
-	
-	delta_direction += delta_d * 0.01
+	delta_direction += delta_d * 0.05
 	bullet_direction += delta_direction
-	
-	if self.position.y > 600:
-		v = -1
-	elif self.position.y < 120:
-		v = 1
-	
-	time_passed += delta
-	position.y = initial_y_position + sin(time_passed * float_speed) * float_amplitude
+	fire_bullet_straight(bullet_direction)
 
 func fire_bullet_straight(b_direction):
 	var b = bullet.instantiate()
-	b.direction = b.direction.rotated(b_direction / PI)
+	b.direction = b.direction.rotated(deg_to_rad(b_direction))
 	b.position = self.position
 	get_tree().root.add_child(b)

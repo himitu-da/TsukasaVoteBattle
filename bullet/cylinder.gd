@@ -10,7 +10,7 @@ extends Area2D
 @export var max_y = 740.0
 
 var direction = Vector2(1, 0)
-
+@export var hyou: PackedScene
 
 func _ready():
 	connect("area_entered", Callable(self, "_on_body_entered"))
@@ -46,5 +46,8 @@ func _on_body_entered(body):
 		var game_manager = get_node("/root/MainGameScene/GameManager")
 		if game_manager:
 			game_manager.add_votes(1)
+		var h1 = hyou.instantiate()
+		h1.position = self.position + Vector2(20, 10)
+		get_tree().root.add_child(h1)
 		# 弾を削除
 		queue_free()

@@ -124,6 +124,8 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="PlayAgainButton" type="Button" parent="."]
+z_index = 15
+layout_mode = 0
 offset_left = 320.0
 offset_top = 512.0
 offset_right = 576.0
@@ -135,6 +137,8 @@ text = "もう一回やる
 script = ExtResource("3_sgg0j")
 
 [node name="TopButton" type="Button" parent="."]
+z_index = 15
+layout_mode = 0
 offset_left = 704.0
 offset_top = 512.0
 offset_right = 960.0
