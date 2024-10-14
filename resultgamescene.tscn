@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7wnjtq26xsl2"]
+[gd_scene load_steps=5 format=3 uid="uid://b7wnjtq26xsl2"]
 
 [ext_resource type="FontFile" uid="uid://cip2th0qpjt52" path="res://ReggaeOne-Regular.ttf" id="1_q3qgk"]
 [ext_resource type="Script" path="res://resultgamescene.gd" id="1_xycfj"]
+[ext_resource type="Script" path="res://play_button.gd" id="3_sgg0j"]
+[ext_resource type="Script" path="res://top_button.gd" id="4_ua2vr"]
 
 [node name="Resultgamescene" type="Control"]
 layout_mode = 3
@@ -27,35 +29,121 @@ layout_mode = 0
 offset_left = 128.0
 offset_top = 192.0
 offset_right = 416.0
-offset_bottom = 297.0
+offset_bottom = 262.0
 theme_override_fonts/font = ExtResource("1_q3qgk")
-theme_override_font_sizes/font_size = 72
+theme_override_font_sizes/font_size = 48
 text = "投票数："
 
 [node name="VotesValue" type="Label" parent="Votes"]
 layout_mode = 0
 offset_left = 320.0
 offset_right = 832.0
-offset_bottom = 105.0
+offset_bottom = 70.0
 theme_override_fonts/font = ExtResource("1_q3qgk")
-theme_override_font_sizes/font_size = 72
+theme_override_font_sizes/font_size = 48
 text = "999999"
 
 [node name="Rank" type="Label" parent="."]
 layout_mode = 0
 offset_left = 128.0
-offset_top = 320.0
+offset_top = 260.0
 offset_right = 344.0
-offset_bottom = 425.0
+offset_bottom = 330.0
 theme_override_fonts/font = ExtResource("1_q3qgk")
-theme_override_font_sizes/font_size = 72
+theme_override_font_sizes/font_size = 48
 text = "順位　："
 
 [node name="RankValue" type="Label" parent="Rank"]
 layout_mode = 0
 offset_left = 320.0
 offset_right = 832.0
-offset_bottom = 105.0
+offset_bottom = 70.0
 theme_override_fonts/font = ExtResource("1_q3qgk")
-theme_override_font_sizes/font_size = 72
+theme_override_font_sizes/font_size = 48
 text = "99"
+
+[node name="Hidan" type="Label" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 328.0
+offset_right = 344.0
+offset_bottom = 398.0
+theme_override_fonts/font = ExtResource("1_q3qgk")
+theme_override_font_sizes/font_size = 48
+text = "被弾数："
+
+[node name="HidanValue" type="Label" parent="Hidan"]
+layout_mode = 0
+offset_left = 320.0
+offset_right = 832.0
+offset_bottom = 70.0
+theme_override_fonts/font = ExtResource("1_q3qgk")
+theme_override_font_sizes/font_size = 48
+text = "99"
+
+[node name="Bomb" type="Label" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 396.0
+offset_right = 344.0
+offset_bottom = 466.0
+theme_override_fonts/font = ExtResource("1_q3qgk")
+theme_override_font_sizes/font_size = 48
+text = "ボム数："
+
+[node name="BombValue" type="Label" parent="Bomb"]
+layout_mode = 0
+offset_left = 320.0
+offset_right = 832.0
+offset_bottom = 70.0
+theme_override_fonts/font = ExtResource("1_q3qgk")
+theme_override_font_sizes/font_size = 48
+text = "99"
+
+[node name="Character" type="Label" parent="."]
+layout_mode = 0
+offset_left = 772.0
+offset_top = 212.0
+offset_right = 1108.0
+offset_bottom = 282.0
+theme_override_fonts/font = ExtResource("1_q3qgk")
+theme_override_font_sizes/font_size = 48
+text = "あなたの順位は"
+
+[node name="CharacterValue" type="Label" parent="Character"]
+layout_mode = 0
+offset_left = -88.0
+offset_top = 88.0
+offset_right = 420.0
+offset_bottom = 152.0
+theme_override_fonts/font = ExtResource("1_q3qgk")
+theme_override_font_sizes/font_size = 32
+text = "フランドール・スカーレット"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PlayAgainButton" type="Button" parent="."]
+offset_left = 320.0
+offset_top = 512.0
+offset_right = 576.0
+offset_bottom = 640.0
+theme_override_fonts/font = ExtResource("1_q3qgk")
+theme_override_font_sizes/font_size = 36
+text = "もう一回やる
+(Sキー)"
+script = ExtResource("3_sgg0j")
+
+[node name="TopButton" type="Button" parent="."]
+offset_left = 704.0
+offset_top = 512.0
+offset_right = 960.0
+offset_bottom = 640.0
+theme_override_fonts/font = ExtResource("1_q3qgk")
+theme_override_font_sizes/font_size = 36
+text = "トップに戻る
+（Tキー）"
+script = ExtResource("4_ua2vr")
+
+[connection signal="pressed" from="PlayAgainButton" to="PlayAgainButton" method="_on_play_button_pressed"]
+[connection signal="pressed" from="TopButton" to="TopButton" method="_on_play_button_pressed"]

@@ -4,82 +4,15 @@ extends Node
 @export var time_limit: float = 100.0  # 100秒に設定
 var remaining_time: float
 
-# 順位基準リスト（降順）
-var vote_thresholds = [
-	21959,
-	20249,
-	17324,
-	16273,
-	14445,
-	14437,
-	13785,
-	9921,
-	9377,
-	8159,
-	7973,
-	7417,
-	7235,
-	6762,
-	6491,
-	5996,
-	5559,
-	5302,
-	5235,
-	5207,
-	5152,
-	4914,
-	4806,
-	4288,
-	4151,
-	3716,
-	3715,
-	3695,
-	3635,
-	3519,
-	3463,
-	3372,
-	3305,
-	3220,
-	3174,
-	3144,
-	3100,
-	3012,
-	3011,
-	2967,
-	2849,
-	2803,
-	2774,
-	2731,
-	2540,
-	2528,
-	2278,
-	2220,
-	2087,
-	1926,
-	1924,
-	1898,
-	1883,
-	1776,
-	1680,
-	1667,
-	1611,
-	1602,
-	1590,
-	1568
-]
-
-# スコア（票数）
-#var votes: int = 1553
-
 # UIラベルへの参照
 @onready var timer_label: Label = $TimerLabel
 @onready var score_label: Label = $ScoreLabel
 @onready var rank_label: Label = $RankLabel  # 順位表示用のLabel
 
-var isFinished = false
 
 func _ready():
 	remaining_time = time_limit
+	GameData.reset()
 	
 	update_timer_label()
 	update_score_label()
@@ -89,11 +22,10 @@ func _process(delta):
 		remaining_time -= delta
 		remaining_time = max(remaining_time, 0.0)  # 負の値にならないように
 		
-		if remaining_time <= 0.0 and not isFinished:
-			on_time_up()
-			isFinished = true
+	if remaining_time <= 0.0:
+		on_time_up()
 		
-		update_timer_label()
+	update_timer_label()
 
 func update_timer_label():
 	if remaining_time < 0:
@@ -106,14 +38,11 @@ func update_score_label():
 	score_label.text = "%d" % GameData.votes
 	
 	# 順位を取得
-	GameData.rank = get_rank(GameData.votes)
+	GameData.rank = GameData.get_rank(GameData.votes)
 	rank_label.text = "%d" % GameData.rank
 
 func on_time_up():
-	print("時間切れ！ゲームオーバー")
-	# 例: ゲームオーバー画面に遷移する
-	get_tree().change_scene("res://resultgamescene.tscn")
-	# スコアを表示するなどの処理を追加
+	get_tree().change_scene_to_file("res://resultgamescene.tscn")
 
 func add_votes(amount: int):
 	GameData.votes += amount
@@ -122,10 +51,3 @@ func add_votes(amount: int):
 func change_time_limit(times: float):
 	remaining_time += times
 	update_timer_label()
-
-# 票数に基づいて順位を返す関数
-func get_rank(current_votes: int) -> int:
-	for i in range(vote_thresholds.size()):
-		if current_votes >= vote_thresholds[i]:
-			return i + 1
-	return vote_thresholds.size() + 1  # リスト内にない場合

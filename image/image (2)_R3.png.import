@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsw10e15javn"
-path="res://.godot/imported/cylinder.png-a35e5d05dbd94bd18ac20447bb54d43c.ctex"
+uid="uid://bdi7itrbl61s8"
+path="res://.godot/imported/image (2)_R3.png-4242f21065d46da6ad519fa716831fae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bullet/cylinder.png"
-dest_files=["res://.godot/imported/cylinder.png-a35e5d05dbd94bd18ac20447bb54d43c.ctex"]
+source_file="res://image/image (2)_R3.png"
+dest_files=["res://.godot/imported/image (2)_R3.png-4242f21065d46da6ad519fa716831fae.ctex"]
 
 [params]
 

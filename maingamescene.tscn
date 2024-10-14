@@ -8,7 +8,7 @@
 
 [node name="MainGameScene" type="Node2D"]
 
-[node name="koishi" parent="." instance=ExtResource("1_xs1ut")]
+[node name="enemy" parent="." instance=ExtResource("1_xs1ut")]
 position = Vector2(1024, 384)
 slide_on_ceiling = false
 player = NodePath("../player")

@@ -8,6 +8,7 @@ var direction = Vector2(-1, 0)
 
 func _ready():
 	connect("body_entered", Callable(self, "_on_body_entered"))
+	connect("area_entered", Callable(self, "_on_area_entered"))
 
 func _process(delta):
 	# 弾を指定方向に移動させる
@@ -27,4 +28,9 @@ func _on_body_entered(body):
 		var game_manager = get_node("/root/MainGameScene/GameManager")
 		if game_manager:
 			game_manager.change_time_limit(-5)
+			GameData.hidan += 1
+		queue_free()
+
+func _on_area_entered(body):
+	if body.is_in_group("bomb_aura"):
 		queue_free()

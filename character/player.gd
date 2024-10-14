@@ -1,7 +1,12 @@
 extends CharacterBody2D
 
 @export var cylinder: PackedScene
+@export var bomb_aura: PackedScene
+
+# 直近のショット
 var last_time_shot = 0
+# 直近のボム
+var last_time_bomb = 5.0
 
 # 通常の移動速度
 @export var speed = 400
@@ -39,6 +44,7 @@ func _ready():
 func _process(delta):
 	# 時間追加
 	last_time_shot += delta
+	last_time_bomb += delta
 	# 入力を受け取ってプレイヤーの動きを更新
 	handle_input()
 	
@@ -76,6 +82,14 @@ func handle_input():
 		get_tree().root.add_child(c1)
 		get_tree().root.add_child(c2)
 		last_time_shot = 0
+	
+	# ボム
+	if Input.is_action_pressed("ui_bomb") && last_time_bomb > 5:
+		var b1 = bomb_aura.instantiate()
+		b1.position = self.position
+		get_tree().root.add_child(b1)
+		GameData.bomb += 1
+		last_time_bomb = 0
 
 	# 速度を決定（Shiftキーが押されている場合は低速移動）
 	var current_speed = speed
