@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://jc0dlvn7vhfd"]
 
 [ext_resource type="Script" path="res://bullet/bullet_medium_blue.gd" id="1_58jbm"]
-[ext_resource type="Texture2D" uid="uid://cqxsa43x42d6c" path="res://image/nc165950_【東方】弾幕素材_小弾_R3.png" id="2_oub6u"]
+[ext_resource type="Texture2D" uid="uid://cqxsa43x42d6c" path="res://image/syodama.png" id="2_oub6u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u0pgg"]
 radius = 9.05539

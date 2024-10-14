@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqxsa43x42d6c"
-path="res://.godot/imported/nc165950_【東方】弾幕素材_小弾_R3.png-37b3fe3cf92ce2f9a105c5c34b1c2a53.ctex"
+uid="uid://bvela8od72sdf"
+path="res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://image/nc165950_【東方】弾幕素材_小弾_R3.png"
-dest_files=["res://.godot/imported/nc165950_【東方】弾幕素材_小弾_R3.png-37b3fe3cf92ce2f9a105c5c34b1c2a53.ctex"]
+source_file="res://icon.png"
+dest_files=["res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex"]
 
 [params]
 

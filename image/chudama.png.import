@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ccxrf7vgmpdm2"
-path="res://.godot/imported/nc177465_弾幕素材(中弾).png-eeace11ac5611d75d9b70e93c0da1cca.ctex"
+path="res://.godot/imported/chudama.png-d7972553820dad7ab8a1babc8a499900.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://image/nc177465_弾幕素材(中弾).png"
-dest_files=["res://.godot/imported/nc177465_弾幕素材(中弾).png-eeace11ac5611d75d9b70e93c0da1cca.ctex"]
+source_file="res://image/chudama.png"
+dest_files=["res://.godot/imported/chudama.png-d7972553820dad7ab8a1babc8a499900.ctex"]
 
 [params]
 
